@@ -12,10 +12,8 @@ import 'network/dio-helper.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-
   await SharedPrefHelper.init();
   bool? isDark = SharedPrefHelper.getBoolean(key: 'isDark');
   runApp(MyApp(isDark!));
