@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shakow_makow/cubit/news-cubit.dart';
 import 'package:shakow_makow/cubit/news-states.dart';
+import 'package:shakow_makow/screens/search-screen.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,7 +22,12 @@ class HomePage extends StatelessWidget {
                 icon: Icon(
                   Icons.search,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()),
+                  );
+                },
               ),
               IconButton(
                 icon: Icon(

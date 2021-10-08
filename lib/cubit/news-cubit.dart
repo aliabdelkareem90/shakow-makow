@@ -118,7 +118,7 @@ class NewsCubit extends Cubit<NewsStates> {
       ).then((value) {
         // print(value.data['articles'][0]['title']);
         science = value.data['articles'] as List;
-        print(sports[0]['title']);
+        print(science[0]['title']);
 
         emit(GetScienceNewsSuccessState());
       }).catchError((error) {
@@ -128,5 +128,28 @@ class NewsCubit extends Cubit<NewsStates> {
     } else {
       emit(GetScienceNewsSuccessState());
     }
+  }
+
+  List<dynamic> search = [];
+
+  void getSearchResults(String value) {
+    emit(GetSearchLoadingState());
+    search = [];
+
+    DioHelper.getData(
+      url: 'v2/everything',
+      query: {
+        'q': '$value',
+        'apiKey': 'ea74d2ab35164ad9b48bb00d80a22edd',
+      },
+    ).then((value) {
+      // print(value.data['articles'][0]['title']);
+      search = value.data['articles'] as List;
+
+      emit(GetSearchSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetSearchErrorState(error.toString()));
+    });
   }
 }
